@@ -2,6 +2,9 @@
 Django settings for obria project.
 """
 
+from django.db import connections
+import pprint
+
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
@@ -78,11 +81,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'OIAA',         # The database name you created
+        'NAME': 'oiaa',         # The database name you created
         'USER': 'postgres',       # The user you created
         'PASSWORD': '123456', # The password you set
         'HOST': 'localhost',           # Or your DB server's IP/hostname
-        'PORT': '7718',                # Default PostgreSQL port
+        'PORT': '5432',                # Default PostgreSQL port
     }
 }
 
@@ -172,3 +175,17 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+
+
+try:
+    
+    conn = connections['default']
+    print("\n🔍 Connection params:")
+    pprint.pprint(conn.settings_dict)
+    conn.ensure_connection()
+    print("✅ Database connection established successfully.")
+except Exception as e:
+    import traceback
+    print("❌ Error connecting to database:")
+    traceback.print_exc()

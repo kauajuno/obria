@@ -1,0 +1,73 @@
+'use client'
+import api from './proxy'
+
+export const loginUser = async (username: string, password: string) => {
+  try {
+    const res = await api.post('users/auth/login/', { username, password })
+
+    localStorage.setItem('access', res.data.access)
+    localStorage.setItem('refresh', res.data.refresh)
+
+    return {
+      ok: true,
+      status: res.status,
+      message: 'Login successful',
+      data: res.data
+    }
+  } catch (error: any) {
+    const status = error.response?.status || 500
+    const message =
+      status === 401
+        ? 'Usuário ou senha inválidos.'
+        : error.response?.data?.detail || 'Erro ao fazer login.'
+
+    return {
+      ok: false,
+      status,
+      message
+    }
+  }
+}
+
+
+// ✅ Register
+export const registerUser = async (
+  username: string,
+  email: string,
+  password: string,
+  nickname?: string
+) => {
+  try {
+    const res = await api.post('/users/register/', {
+      username,
+      email,
+      password,
+      password2: password,
+      user_type: 'participant',
+      nickname: nickname || username,
+    })
+    console.log('User registered:', res.data)
+    return true
+  } catch (error: any) {
+    console.error('Registration failed:', error.response?.data || error.message)
+    return false
+  }
+}
+
+// ✅ Get current user info
+export const getCurrentUser = async () => {
+  try {
+    const res = await api.get('/users/me/')
+    return res.data
+  } catch (error) {
+    console.error('Failed to fetch user info:', error)
+    throw error
+  }
+}
+
+// ✅ Logout helper
+export const logout = () => {
+  localStorage.removeItem('access')
+  localStorage.removeItem('refresh')
+  window.location.href = '/login'
+}
