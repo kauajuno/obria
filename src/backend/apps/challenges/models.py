@@ -18,6 +18,8 @@ class Challenge(models.Model):
     instructions = models.TextField(verbose_name='Instruções')
     notebook_template = models.FileField(
         upload_to='challenges/templates/',
+        null=True,
+        blank=True,
         verbose_name='Template do Notebook'
     )
     dataset_file = models.FileField(
