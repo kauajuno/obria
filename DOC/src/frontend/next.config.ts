@@ -1,17 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // 1. Isso diz pro Next.js criar um site estático (HTML/CSS) para o Render
-  output: 'export',
+import type { NextConfig } from "next";
 
-  // 2. Isso ignora erros de TypeScript no build (Resolve o seu erro atual)
+const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  
-  // (Opcional) Evita otimização de imagem que não funciona em site estático
-  images: {
-    unoptimized: true,
-  },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

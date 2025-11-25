@@ -56,7 +56,3 @@ export default function ChallengeDetailsPage() {
     </section>
   )
 }
-
-export async function generateStaticParams() {
-  return [];
-}
