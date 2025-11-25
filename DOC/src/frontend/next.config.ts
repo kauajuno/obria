@@ -7,11 +7,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-
-  // 3. Isso ignora erros de ESLint no build
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   
   // (Opcional) Evita otimização de imagem que não funciona em site estático
   images: {
