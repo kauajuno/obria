@@ -4,7 +4,7 @@ import api from './proxy'
 export const loginUser = async (username: string, password: string) => {
   try {
     const res = await api.post('users/auth/login/', { username, password })
-    console.log(res)
+
     localStorage.setItem('access', res.data.access)
     localStorage.setItem('refresh', res.data.refresh)
 
@@ -15,7 +15,6 @@ export const loginUser = async (username: string, password: string) => {
       data: res.data
     }
   } catch (error: any) {
-    console.log(error)
     const status = error.response?.status || 500
     const message =
       status === 401
