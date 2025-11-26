@@ -81,3 +81,49 @@ export const getChallengeById = async (id: string | number) => {
   const res = await api.get(`challenges/challenges/${id}/`)
   return res.data
 }
+
+// Create a team (only tutors)
+export const createTeam = async (teamData: any) => {
+  try {
+    const res = await api.post("/teams/", teamData)
+    return res.data
+  } catch (err: any) {
+
+    const backendMessage =
+      err.response?.data?.detail ||
+      err.response?.data?.error ||
+      JSON.stringify(err.response?.data) ||
+      "Erro desconhecido"
+
+    throw new Error(backendMessage)
+  }
+}
+
+
+// Get all teams
+export const getAllTeams = async () => {
+  const res = await api.get("users/teams/")
+  return res.data.results
+}
+
+// Get my teams (for tutor OR participant)
+export const getMyTeams = async () => {
+  const res = await api.get("/teams/my_teams/")
+  return res.data
+}
+
+// Add member
+export const addTeamMember = async (teamId: number, participantId: number) => {
+  const res = await api.post(`/teams/${teamId}/add_member/`, {
+    participant_id: participantId,
+  })
+  return res.data
+}
+
+// Remove member
+export const removeTeamMember = async (teamId: number, participantId: number) => {
+  const res = await api.delete(`/teams/${teamId}/remove_member/`, {
+    data: { participant_id: participantId },
+  })
+  return res.data
+}
