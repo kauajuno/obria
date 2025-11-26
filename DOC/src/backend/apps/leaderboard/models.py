@@ -19,3 +19,4 @@ class LeaderboardEntry(models.Model):
     
     def __str__(self):
         return f"{self.team.name} - {self.best_accuracy:.2%}"
+

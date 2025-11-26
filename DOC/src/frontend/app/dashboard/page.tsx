@@ -34,7 +34,7 @@ export default function DashboardPage() {
                 </CardHeader>
                 <CardContent>
                     <p>Confira o ranking das equipes.</p>
-                    <Link href="/dashboard/leaderboard" className="text-primary">Ver ranking →</Link>
+                    <Link href="/dashboard/ranking" className="text-primary">Ver ranking →</Link>
                 </CardContent>
             </Card>
         </div>

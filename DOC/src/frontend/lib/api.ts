@@ -57,7 +57,7 @@ export const registerUser = async (
 // ✅ Get current user info
 export const getCurrentUser = async () => {
   try {
-    const res = await api.get('/users/me/')
+    const res = await api.get('users/users/me/')
     return res.data
   } catch (error) {
     console.error('Failed to fetch user info:', error)
@@ -86,7 +86,7 @@ export const getChallengeById = async (id: string | number) => {
 // Create a team (only tutors)
 export const createTeam = async (teamData: any) => {
   try {
-    const res = await api.post("/teams/", teamData)
+    const res = await api.post("users/teams/", teamData)
     return res.data
   } catch (err: any) {
 
@@ -109,13 +109,13 @@ export const getAllTeams = async () => {
 
 // Get my teams (for tutor OR participant)
 export const getMyTeams = async () => {
-  const res = await api.get("/teams/my_teams/")
+  const res = await api.get("users/teams/my_teams/")
   return res.data
 }
 
 // Add member
 export const addTeamMember = async (teamId: number, participantId: number) => {
-  const res = await api.post(`/teams/${teamId}/add_member/`, {
+  const res = await api.post(`users/teams/${teamId}/add_member/`, {
     participant_id: participantId,
   })
   return res.data
@@ -123,13 +123,23 @@ export const addTeamMember = async (teamId: number, participantId: number) => {
 
 // Remove member
 export const removeTeamMember = async (teamId: number, participantId: number) => {
-  const res = await api.delete(`/teams/${teamId}/remove_member/`, {
+  const res = await api.delete(`users/teams/${teamId}/remove_member/`, {
     data: { participant_id: participantId },
   })
   return res.data
 }
 
 export const getTeamById = async (id: number) => {
-  const res = await api.get(`/teams/${id}/`)
+  const res = await api.get(`users/teams/${id}/`)
   return res.data
 }
+
+export const getAllUsers = async () => {
+  const res = await api.get("users/users/")
+  return res.data
+}
+
+export const getLeaderboard = async () => {
+  const res = await api.get("leaderboard/leaderboard/");
+  return res.data.results || res.data; 
+};
