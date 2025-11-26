@@ -74,6 +74,7 @@ export const logout = () => {
 
 export const getChallenges = async () => {
   const res = await api.get("challenges/challenges/")
+  console.log(res)
   return res.data
 }
 
@@ -125,5 +126,10 @@ export const removeTeamMember = async (teamId: number, participantId: number) =>
   const res = await api.delete(`/teams/${teamId}/remove_member/`, {
     data: { participant_id: participantId },
   })
+  return res.data
+}
+
+export const getTeamById = async (id: number) => {
+  const res = await api.get(`/teams/${id}/`)
   return res.data
 }

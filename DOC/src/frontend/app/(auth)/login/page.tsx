@@ -25,8 +25,6 @@ export default function LoginPage() {
 
     const onSubmit = async (data: FormData) => {
         const result = await loginUser(data.username, data.password)
-        console.log(data.username)
-        console.log(data.password)
 
         if (result.ok) {
             toast.success(result.message)
