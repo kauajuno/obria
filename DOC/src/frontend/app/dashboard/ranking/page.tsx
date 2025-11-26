@@ -22,7 +22,7 @@ export default function LeaderboardPage() {
 
             <div className="border rounded-lg shadow overflow-hidden">
                 <table className="w-full text-left">
-                    <thead className="bg-gray-100 border-b">
+                    <thead className="bg-gray-800 border-b">
                         <tr>
                             <th className="p-3">Rank</th>
                             <th className="p-3">Equipe</th>
